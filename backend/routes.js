@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/offres', async (req, res) => {
     try {
         let offres = await readOffres();
-        const { domaine, region, modalitesalaireMin, q, page = 1, limite = 10 } = req.query;
+        const { domaine, region, modalite, salaireMin, q, page = 1, limite = 10 } = req.query;
 
         if (domaine) offres = offres.filter(o => o.domaine === domaine);
         if (region) offres = offres.filter(o => o.region === region);
