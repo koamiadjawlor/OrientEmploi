@@ -1,3 +1,5 @@
+// Pourcentage de code personnel : 80%
+
 import express from 'express';
 import { readOffres } from './repository.js';
 

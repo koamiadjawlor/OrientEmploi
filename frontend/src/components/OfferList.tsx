@@ -1,3 +1,4 @@
+// Pourcentage de code personnel : 80% 
 import React from 'react';
 import OfferCard from './OfferCard';
 import type { Offre } from './OfferCard';

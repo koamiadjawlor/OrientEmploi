@@ -1,3 +1,6 @@
+
+// Pourcentage de code personnel : 100%
+
 import express from 'express';
 import cors from 'cors';
 import apiRoutes from './routes.js';
