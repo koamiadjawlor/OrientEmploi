@@ -17,7 +17,7 @@ function App() {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   
-  // NOUVEAU : Clé pour forcer la barre de recherche à se vider
+  // Clé pour forcer la barre de recherche à se vider
   const [resetKey, setResetKey] = useState(0);
   
   const fetchOffres = () => {
@@ -26,6 +26,7 @@ function App() {
     if (filters && filters.domaine) queryParams.append('domaine', filters.domaine);
     if (filters && filters.region) queryParams.append('region', filters.region);
     if (filters && filters.salaireMin) queryParams.append('salaireMin', filters.salaireMin);
+    if (filters && filters.modalite) queryParams.append('modalite', filters.modalite);
 
     api.get(`/offres?${queryParams.toString()}`)
       .then(res => setOffres(res.data.data))
@@ -42,7 +43,7 @@ function App() {
     );
   };
 
-  // NOUVEAU : Fonction pour tout remettre à zéro
+  // Fonction pour tout remettre à zéro
   const handleReset = () => {
     setFilters({}); // Annule les filtres API
     setShowFavoritesOnly(false); // Quitte la vue favoris
