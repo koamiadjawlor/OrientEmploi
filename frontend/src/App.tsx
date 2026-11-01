@@ -7,7 +7,13 @@ import type { Offre } from "./components/OfferCard";
 function App() {
   const [offres, setOffres] = useState<Offre[]>([]);
   const [filters, setFilters] = useState<any>({});
-  const [favorites, setFavorites] = useState<number[]>([]); 
+  const [favorites, setFavorites] = useState<number[]>(() => {
+    const saved = localStorage.getItem('orientemploi_favoris');
+    return saved ? JSON.parse(saved) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem('orientemploi_favoris', JSON.stringify(favorites));
+  }, [favorites]);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   
