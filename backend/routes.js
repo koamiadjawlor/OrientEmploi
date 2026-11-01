@@ -47,5 +47,5 @@ router.get('/filtres', async (req, res) => {
     }
 });
 
-// 👈 LA LIGNE CRUCIALE À NE PAS OUBLIER :
+
 export default router;
