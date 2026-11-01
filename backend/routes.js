@@ -35,16 +35,23 @@ router.get('/offres', async (req, res) => {
 
 // Route GET pour les filtres
 router.get('/filtres', async (req, res) => {
-    try {
-        const offres = await readOffres();
-        const domaines = [...new Set(offres.map(o => o.domaine))];
-        const regions = [...new Set(offres.map(o => o.region))];
-        const modalites = [...new Set(offres.map(o => o.modalite))];
+  try {
+    const offres = await readOffres();
+    // Normalisation de la casse et suppression des entrées invalides
+    const domaines = [...new Set(
+      offres
+        .map(o => o.domaine ? o.domaine.trim() : '')
+        .filter(d => d && d !== 'the')
+        .map(d => d.charAt(0).toUpperCase() + d.slice(1))
+    )].sort();
 
-        res.status(200).json({ domaines, regions, modalites });
-    } catch (error) {
-        res.status(500).json({ error: "Erreur serveur." });
-    }
+    const regions = [...new Set(offres.map(o => o.region).filter(r => r && r !== 'Non spécifié'))].sort();
+    const modalites = [...new Set(offres.map(o => o.modalite).filter(Boolean))];
+
+    res.status(200).json({ domaines, regions, modalites });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur." });
+  }
 });
 
 export default router;
